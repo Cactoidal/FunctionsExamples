@@ -59,7 +59,7 @@ If you were to place the following into `executeRequest()`:
 require(keccack256(bytes(source)) == keccak256(bytes(sourceCode)));
 ```
 
-or rewrite `executeRequest()` to be internal, and create a new function called `callRequest()` that calls `executeRequest()` while passing `sourceCode` as the `source` parameter, users can be certain that the DON will always use the uploaded on-chain logic whenever the contract executes a request.  Note that these validation methods are somewhat gas-expensive - you’ll probably need to increase the `gasLimit` value in **request.js** to at least 1,000,000.
+or within `executeRequest()` rewrite `initializeRequest()` to pass `sourceCode` instead of `source`, users can be certain that the DON will always use the uploaded on-chain logic whenever the contract executes a request.  Note that these validation methods are somewhat gas-expensive - you’ll probably need to increase the `gasLimit` value in **request.js** to at least 1,000,000.
 
 If `setString()` is written to be owner-only, and you’ve revoked ownership, that uploaded source code is now totally immutable and the DON will always execute it as written, with whatever arguments are passed.  You could also give control of `setString()` to a multisig or DAO, in case it does one day need changes - although redeploying could be a better option in that case.
 
