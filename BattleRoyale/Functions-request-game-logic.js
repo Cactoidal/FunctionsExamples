@@ -120,6 +120,9 @@ for (var m = 0; m < health_by_id.length; m++) {
     if(health_by_id[m] < 0) {
         health_by_id[m] = 0
     }
+    if(health_by_id[m] > 9) {
+        health_by_id[m] = 9
+    }
     packed_string = packed_string + health_by_id[m]
 }
 
